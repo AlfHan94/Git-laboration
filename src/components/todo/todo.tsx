@@ -5,14 +5,27 @@ function Todo() {
   const [todos, setTodos] = useState<TodoType[]>([]);
   const [newTodo, setNewTodo] = useState("");
   const [deletedTodo, setDeletedTodo] = useState<TodoType | null>(null);
-
+  const [filterCompletedTodos, setFilterCompletedTodos] = useState(true);
+  const visiblesTodos = filterCompletedTodos ? todos.filter((todo) => !todo.completed) : todos
   useEffect(() => {
     fetch("src/mockdata/todo.json")
       .then((res) => res.json())
       .then((data) => {
         setTodos(data.todos);
       });
-  }, []);
+
+
+
+    // if (filterCompletedTodos == false) {
+    //   setTodos((prevTodos) =>
+    //     prevTodos.filter((todo) => todo.completed !== true)
+    //   );
+    // } else {
+    //   setTodos(todos)
+    // }
+
+
+  }, [filterCompletedTodos]);
 
   function setCompleted(selectedTodo: TodoType) {
     setTodos((prevTodos) =>
@@ -47,9 +60,13 @@ function Todo() {
     <>
       <h1>Todo</h1>
       <div className="todos-container">
-        {todos?.map((todo: TodoType, index: number) => (
-          <div className="todos" key={index}>
+        <button onClick={() => setFilterCompletedTodos(!filterCompletedTodos)}>
+          {filterCompletedTodos ? "Visa alla" : "Dölj slutförda"}
+        </button>
+        {visiblesTodos.map((todo) => (
+          <div key={todo.id}>
             <span className="todo-title">{todo.title}</span>
+
             <input
               type="checkbox"
               checked={todo.completed}
