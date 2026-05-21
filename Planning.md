@@ -17,9 +17,9 @@ User Stories
 - Som användare vill jag ha ett enkelt och tydligt gränssnitt.
 
 Prioriterad Backlog
-1. Skapa en Todo Page
-2. Skapa och Visa todos
-3. Markera som klar
-4. Ta bort todo
-5. Filtrering
+1. Skapa en Todo Page - klar 
+2. Skapa och Visa todos - klar 
+3. Markera som klar - klar 
+4. Ta bort todo - klar 
+5. Filtrering - klar 
 6. Styling
