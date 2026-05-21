@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import type { TodoType } from "../../types/todo";
+import "./todo.css";
 
 function Todo() {
   const [todos, setTodos] = useState<TodoType[]>([]);
@@ -42,19 +43,26 @@ function Todo() {
   function deleteTodo(selectedTodo: TodoType) {
     setDeletedTodo(selectedTodo);
     setTodos((prevTodos) =>
-      prevTodos.filter((todo) => todo.title !== selectedTodo.title),
+      prevTodos.filter((todo) => todo.id !== selectedTodo.id),
     );
   }
 
   return (
-    <>
+      <main className="todo-page">
       <h1>Todo</h1>
+
       <div className="todos-container">
-        <button onClick={() => setFilterCompletedTodos(!filterCompletedTodos)}>
+
+        <button 
+        className="filter-button" 
+        onClick={() => setFilterCompletedTodos(!filterCompletedTodos)}>
           {filterCompletedTodos ? "Visa alla" : "Dölj slutförda"}
         </button>
+
         {visiblesTodos.map((todo, index) => (
-          <div key={index}>
+          <div 
+          key={index} 
+          className={`todo-item ${todo.completed ? "completed" : ""}`}>
             <span className="todo-title">{todo.title}</span>
 
             <input
@@ -62,7 +70,11 @@ function Todo() {
               checked={todo.completed}
               onChange={() => setCompleted(todo)}
             />
-            <button onClick={() => deleteTodo(todo)}>Delete</button>
+            <button 
+            className="delete-button" 
+            onClick={() => deleteTodo(todo)}>
+              Delete
+            </button>
           </div>
         ))}
         <div className="add-todo">
@@ -72,10 +84,12 @@ function Todo() {
             onChange={(e) => setNewTodo(e.target.value)}
             placeholder="Add a new todo"
           />
-          <button onClick={addTodo}>Add</button>
+          <button className="add-button" onClick={addTodo}>
+            Add
+          </button>
         </div>
       </div>
-    </>
+      </main>
   );
 }
 
