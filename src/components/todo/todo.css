@@ -1,0 +1,21 @@
+#todos-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+#todo-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.todo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
