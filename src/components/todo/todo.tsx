@@ -7,25 +7,14 @@ function Todo() {
   const [deletedTodo, setDeletedTodo] = useState<TodoType | null>(null);
   const [filterCompletedTodos, setFilterCompletedTodos] = useState(true);
   const visiblesTodos = filterCompletedTodos ? todos.filter((todo) => !todo.completed) : todos
+
   useEffect(() => {
     fetch("src/mockdata/todo.json")
       .then((res) => res.json())
       .then((data) => {
         setTodos(data.todos);
       });
-
-
-
-    // if (filterCompletedTodos == false) {
-    //   setTodos((prevTodos) =>
-    //     prevTodos.filter((todo) => todo.completed !== true)
-    //   );
-    // } else {
-    //   setTodos(todos)
-    // }
-
-
-  }, [filterCompletedTodos]);
+  }, []);
 
   function setCompleted(selectedTodo: TodoType) {
     setTodos((prevTodos) =>
@@ -49,6 +38,7 @@ function Todo() {
       setNewTodo("");
     }
   }
+
   function deleteTodo(selectedTodo: TodoType) {
     setDeletedTodo(selectedTodo);
     setTodos((prevTodos) =>
@@ -63,8 +53,8 @@ function Todo() {
         <button onClick={() => setFilterCompletedTodos(!filterCompletedTodos)}>
           {filterCompletedTodos ? "Visa alla" : "Dölj slutförda"}
         </button>
-        {visiblesTodos.map((todo) => (
-          <div key={todo.id}>
+        {visiblesTodos.map((todo, index) => (
+          <div key={index}>
             <span className="todo-title">{todo.title}</span>
 
             <input
