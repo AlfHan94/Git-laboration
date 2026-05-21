@@ -49,7 +49,7 @@ function Todo() {
 
   return (
       <main className="todo-page">
-      <h1>Todo</h1>
+      <h1>Todo List</h1>
 
       <div className="todos-container">
 
